@@ -164,9 +164,14 @@ void TestPiece_t::FractureSurface_t::ContainerFilling()
 	for (auto p = 0; p < PointCount; p++)
 	{
 		auto& NodeNow = *(SurfaceOri[p]);
-		if (NodeNow.x < 0.0 || NodeNow.y < 0.0 || NodeNow.x >= double(XMax) || NodeNow.y >= double(YMax)) continue; // bounds guard: rotation can move points outside the container
-  unsigned int x = unsigned int(NodeNow.x);
-		unsigned int y = unsigned int(NodeNow.y);
+		// WRAP (not skip) coordinates that fall outside the container after centring +
+		// rotation: the XCT surface covers the whole cross-section, so the map is periodic.
+		// Skipping would leave those cells at their initial height 0, making every fracture
+		// above them look "visible" and inflating the visible-breakpoint count.
+  long xi = (long)NodeNow.x % (long)XMax; if (xi < 0) xi += (long)XMax;
+		long yi = (long)NodeNow.y % (long)YMax; if (yi < 0) yi += (long)YMax;
+		unsigned int x = (unsigned int)xi;
+		unsigned int y = (unsigned int)yi;
 		unsigned int z = unsigned int(NodeNow.z);
 		Tar[x][y] = z;
 	}
