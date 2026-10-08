@@ -1,0 +1,15 @@
+﻿# Visual Studio build artefacts
+x64/
+Debug/
+Release/
+.vs/
+*.exe
+*.pdb
+*.ilk
+*.obj
+*.idb
+*.tlog
+*.log
+
+# tool input/output
+*.csv

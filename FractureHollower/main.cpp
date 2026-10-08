@@ -1,0 +1,33 @@
+#include "TestPiece.h"
+#include <cstring>
+
+// Global overrides set from command line
+char g_SurfacePath[512] = "";
+double g_ZOffsetUm = -1;   // -1 = use constexpr default
+double g_SurfaceRotateDeg = 0; // surface rotation angle in degrees
+
+int main(int argc, char* argv[])
+{
+	// Parse args: FractureHollower.exe [F2Report|F3Report] [ZOffsetUm] [RotateDeg]
+	if (argc >= 2) {
+		snprintf(g_SurfacePath, sizeof(g_SurfacePath),
+			"C:\\Users\\12155\\Source\\repos\\think20\\FiberPostprocessor\\FiberPostprocessor\\Results\\%s\\",
+			argv[1]);
+		printf("Using surface: %s\n", g_SurfacePath);
+	}
+	if (argc >= 3) {
+		g_ZOffsetUm = atof(argv[2]);
+		printf("ZOffsetUm override: %.0f um\n", g_ZOffsetUm);
+	}
+	if (argc >= 4) {
+		g_SurfaceRotateDeg = atof(argv[3]);
+		printf("Surface rotation: %.1f deg\n", g_SurfaceRotateDeg);
+	}
+
+	auto Manager = new TestPieceManager_t;
+	Manager->GetData();
+	Manager->CreateTestPieces();
+	Manager->StartTests();
+	Manager->SaveResults();
+	delete Manager;
+}
