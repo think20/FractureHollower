@@ -164,7 +164,8 @@ void TestPiece_t::FractureSurface_t::ContainerFilling()
 	for (auto p = 0; p < PointCount; p++)
 	{
 		auto& NodeNow = *(SurfaceOri[p]);
-		unsigned int x = unsigned int(NodeNow.x);
+		if (NodeNow.x < 0.0 || NodeNow.y < 0.0 || NodeNow.x >= double(XMax) || NodeNow.y >= double(YMax)) continue; // bounds guard: rotation can move points outside the container
+  unsigned int x = unsigned int(NodeNow.x);
 		unsigned int y = unsigned int(NodeNow.y);
 		unsigned int z = unsigned int(NodeNow.z);
 		Tar[x][y] = z;

@@ -9,7 +9,7 @@ constexpr unsigned int YMax = 1280;
 constexpr unsigned int ZMax = 1280;
 
 constexpr unsigned int NMax = XMax * YMax;
-constexpr unsigned int FracturesMax = 1280;
+constexpr unsigned int FracturesMax = 20000; // raised from 1280: tensile-scan blocks carry up to ~2700 fractures
 
 constexpr double PixelperUm = 1 / 3.07;
 constexpr double FiberDiameter = 51 * 2;//um, for F2 and F3
@@ -26,7 +26,7 @@ constexpr char FracturesFile[] = "Fractures.csv";
 
 constexpr char RemainingFracturesFile[] = "RemainingFractures.csv";
 
-constexpr unsigned int RecordMax = 25600;
+constexpr unsigned int RecordMax = 600000; // raised from 25600: the 42-test Fractures.csv has >25600 whitespace tokens
 constexpr unsigned int RecordLenMax = 64;
 
 unsigned int SearchRangeMax = 8;
