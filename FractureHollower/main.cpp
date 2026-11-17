@@ -12,9 +12,12 @@ int main(int argc, char* argv[])
 {
 	// Usage: FractureHollower.exe [F2Report|F3Report] [ZOffsetUm] [RotateDeg] [FracturesDir] [FracturesFile]
 	if (argc >= 2) {
-		snprintf(g_SurfacePath, sizeof(g_SurfacePath),
-			"C:\\Users\\12155\\Source\\repos\\think20\\FiberPostprocessor\\FiberPostprocessor\\Results\\%s\\",
-			argv[1]);
+		// argv[1] may be either a report name (F2Report) or a full/partial path
+		if (strchr(argv[1], '\\') || strchr(argv[1], '/')) {
+			snprintf(g_SurfacePath, sizeof(g_SurfacePath), "%s", argv[1]);
+		} else {
+			snprintf(g_SurfacePath, sizeof(g_SurfacePath), "data\\surfaces\\%s\\", argv[1]);
+		}
 		printf("Using surface: %s\n", g_SurfacePath);
 	}
 	if (argc >= 3) {

@@ -19,9 +19,9 @@ constexpr double ZOffsetUm = 50; //unified: Slice 0 at surface minimum //um, ali
 constexpr double XMean = double(XMax) / 2;
 constexpr double YMean = double(YMax) / 2;
 
-constexpr char CompositeSurfacePath[] = "C:\\Users\\12155\\Source\\repos\\think20\\FiberPostprocessor\\FiberPostprocessor\\Results\\F2Report\\";
+constexpr char CompositeSurfacePath[] = "data\\surfaces\\F2Report\\";   // default root for the height map
 constexpr char CompositeSurfaceFile[] = "StartLayerS.txt";
-constexpr char FracturesPath[] = "C:\\Users\\12155\\Source\\repos\\think20\\HexaSimulator\\HexaSimulator\\";
+constexpr char FracturesPath[] = ".";                    // default: current directory
 constexpr char FracturesFile[] = "Fractures.csv";
 // Runtime override (-1 size = use the constexpr defaults above)
 extern char g_FracturesDir[512];
