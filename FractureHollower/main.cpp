@@ -5,10 +5,12 @@
 char g_SurfacePath[512] = "";
 double g_ZOffsetUm = -1;   // -1 = use constexpr default
 double g_SurfaceRotateDeg = 0; // surface rotation angle in degrees
+char g_FracturesDir[512] = "";
+char g_FracturesFile[512] = "";
 
 int main(int argc, char* argv[])
 {
-	// Parse args: FractureHollower.exe [F2Report|F3Report] [ZOffsetUm] [RotateDeg]
+	// Usage: FractureHollower.exe [F2Report|F3Report] [ZOffsetUm] [RotateDeg] [FracturesDir] [FracturesFile]
 	if (argc >= 2) {
 		snprintf(g_SurfacePath, sizeof(g_SurfacePath),
 			"C:\\Users\\12155\\Source\\repos\\think20\\FiberPostprocessor\\FiberPostprocessor\\Results\\%s\\",
@@ -22,6 +24,14 @@ int main(int argc, char* argv[])
 	if (argc >= 4) {
 		g_SurfaceRotateDeg = atof(argv[3]);
 		printf("Surface rotation: %.1f deg\n", g_SurfaceRotateDeg);
+	}
+	if (argc >= 5) {
+		snprintf(g_FracturesDir, sizeof(g_FracturesDir), "%s", argv[4]);
+		printf("Fractures directory: %s\n", g_FracturesDir);
+	}
+	if (argc >= 6) {
+		snprintf(g_FracturesFile, sizeof(g_FracturesFile), "%s", argv[5]);
+		printf("Fractures file: %s\n", g_FracturesFile);
 	}
 
 	auto Manager = new TestPieceManager_t;

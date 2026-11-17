@@ -23,6 +23,9 @@ constexpr char CompositeSurfacePath[] = "C:\\Users\\12155\\Source\\repos\\think2
 constexpr char CompositeSurfaceFile[] = "StartLayerS.txt";
 constexpr char FracturesPath[] = "C:\\Users\\12155\\Source\\repos\\think20\\HexaSimulator\\HexaSimulator\\";
 constexpr char FracturesFile[] = "Fractures.csv";
+// Runtime override (-1 size = use the constexpr defaults above)
+extern char g_FracturesDir[512];
+extern char g_FracturesFile[512];
 
 constexpr char RemainingFracturesFile[] = "RemainingFractures.csv";
 

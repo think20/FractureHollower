@@ -311,7 +311,7 @@ void TestPieceManager_t::OutputManager_t::SaveData()
 		{
 			auto& Fracture = *(Fractures[rf]);
 			if (Fracture.lost) continue;
-			fprintf(RemFractures, "%lf,%lf,%lf\n", Fracture.r, Fracture.r2, Fracture.theta);
+			fprintf(RemFractures, "%lf,%lf,%lf,%lf\n", Fracture.x, Fracture.y, Fracture.theta, Fracture.r);
 		}
 	}
 }
@@ -370,8 +370,9 @@ TestPieceManager_t::InputManager_t::InputManager_t(TestPieceManager_t* Manager)
 	if (!SurfaceF) { printf("ERROR: Cannot open surface: %s%s\n", SurfacePathS.c_str(), SurfaceFileS.c_str()); }
 	else printf("InputManager: Reading surface from %s\n", SurfaceFileS.c_str());
 
-	std::string FracturesPathS(FracturesPath);
-	std::string FracturesFileS(FracturesFile);
+	std::string FracturesPathS(g_FracturesDir[0] ? g_FracturesDir : FracturesPath);
+	if (!FracturesPathS.empty() && FracturesPathS.back() != '\\' && FracturesPathS.back() != '/') FracturesPathS += '\\';
+	std::string FracturesFileS(g_FracturesFile[0] ? g_FracturesFile : FracturesFile);
 
 	FracturesF = fopen((FracturesPathS + FracturesFileS).c_str(), "r");
 	if (!FracturesF) { printf("ERROR: Cannot open fractures: %s%s\n", FracturesPathS.c_str(), FracturesFileS.c_str()); }

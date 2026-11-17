@@ -13,3 +13,6 @@ Release/
 
 # tool input/output
 *.csv
+
+# Visual Studio user settings
+*.vcxproj.user
